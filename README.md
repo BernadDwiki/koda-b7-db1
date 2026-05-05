@@ -93,7 +93,7 @@ erDiagram
         id int PK
     }
 
-    pembeli }|--|{ produk : "membeli"
+    pembeli ||--|{ produk : "membeli"
     pembeli ||--|| profile : "memiliki"
     pembeli ||--|{ transaksi : "memiliki"
     transaksi ||--|| pembayaran : "memiliki"
