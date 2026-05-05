@@ -5,9 +5,9 @@ erDiagram
     buku {
         int id PK
         string judul
+        string penulis
         int id_kategori
         int id_rak 
-        int id_peminjaman 
     }
 
     kategori {
@@ -30,6 +30,7 @@ erDiagram
         string waktu_pinjam 
         string waktu_kembali 
         int id_petugas 
+        int id_buku
     }
 
     kategori ||--|{ buku : "memiliki"
@@ -57,6 +58,12 @@ erDiagram
         string noTelepon 
         string jenisKelamin
         date tanggalLahir
+    }
+
+    pemesanan {
+        int id PK
+        string nama_pesanan 
+        int total_biaya_pesanan
     }
 
     transaksi {
