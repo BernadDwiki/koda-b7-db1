@@ -7,28 +7,28 @@ CREATE TABLE books (
     updated_at TIMESTAMP,
     category_id int NOT NULL,
     book_shelf_id int NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id),
     FOREIGN KEY (book_shelf_id) REFERENCES book_shelfes(id)
 )
 
 CREATE TABLE categories (
     id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     category_name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP
 )
 
 CREATE TABLE book_shelfes (
     id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    shelf_name VARCHAR(255) NOT NULL
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    shelf_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP
 )
 
 CREATE TABLE officers (
     id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    officer_name VARCHAR(255) NOT NULL
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    officer_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP
 )
 
@@ -38,7 +38,7 @@ CREATE TABLE borrowing_records (
     officer_id int NOT NULL,
     borrow_date DATE NOT NULL,
     return_date DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP,
     FOREIGN KEY (book_id) REFERENCES books(id),
     FOREIGN KEY (officer_id) REFERENCES officers(id)
@@ -55,7 +55,7 @@ VALUES ('Laskar Pelangi', 'Andrea Hirata', '2005-01-01', 1, 1),
        ('Perahu Kertas', 'Dewi Lestari', '2009-01-01', 6, 1),
        ('Supernova: Ksatria, Puteri, dan Bintang Jatuh', 'Dewi Lestari', '2001-01-01', 7, 2),
        ('Supernova: Akar', 'Dewi Lestari', '2012-01-01', 8, 1);
-
+table books;
 INSERT INTO categories (category_name)
 VALUES ('Fiction'),
        ('Non-Fiction'),
@@ -67,7 +67,7 @@ VALUES ('Fiction'),
        ('Romance'),
        ('Thriller'),
        ('Mystery');
-
+table categories;
 INSERT INTO book_shelfes (shelf_name)
 VALUES ('Shelf A'),
        ('Shelf B');
@@ -77,13 +77,15 @@ VALUES ('Officer 1'),
        ('Officer 2');
 
 INSERT INTO borrowing_records (book_id, officer_id, borrow_date, return_date)
-VALUES (1, 1, '2024-01-01', '2024-01-15'),
-       (2, 2, '2024-01-05', NULL),
-       (3, 1, '2024-01-10', '2024-01-20'),
-       (4, 2, '2024-01-15', NULL),
-       (5, 1, '2024-01-20', '2024-01-30'),
-       (6, 2, '2024-01-25', NULL),
-       (7, 1, '2024-01-30', '2024-02-10'),
-       (8, 2, '2024-02-05', NULL),
-       (9, 1, '2024-02-10', '2024-02-20'),
-       (10, 2, '2024-02-15', NULL);
+VALUES (11, 1, '2024-01-01', '2024-01-15'),
+       (12, 2, '2024-01-05', NULL),
+       (13, 1, '2024-01-10', '2024-01-20'),
+       (14, 2, '2024-01-15', NULL),
+       (15, 1, '2024-01-20', '2024-01-30'),
+       (16, 2, '2024-01-25', NULL),
+       (17, 1, '2024-01-30', '2024-02-10'),
+       (18, 2, '2024-02-05', NULL),
+       (19, 1, '2024-02-10', '2024-02-20'),
+       (20, 2, '2024-02-15', NULL);
+
+table borrowing_records;
