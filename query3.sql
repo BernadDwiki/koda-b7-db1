@@ -120,18 +120,21 @@ VALUES (1, 3, 'Dom Cobb'),
        (12, 3, 'Maximus Decimus Meridius'),
        (13, 5, 'Billy Costigan'),
        (14, 3, 'Alfred Borden');
+
+
 -- DQL Data Query Language
 
 table movies;
 table actors;
 table directors;
-
+table movie_actors;
+table genres;
 
 -- menampilkan list direktor beserta banyaknya genre yang sudah di direct
-SELECT d.id, d.first_name, d.last_name, COUNT(m.genre_id) AS genre_count 
+SELECT d.first_name, d.last_name, COUNT(DISTINCT m.genre_id) AS genre_count
 FROM directors d
 JOIN movies m ON m.director_id = d.id
-GROUP BY d.id, d.first_name, d.last_name;
+GROUP BY d.first_name, d.last_name
 
 -- menampilkan list aktor dengan peran lebih dari 5
 SELECT a.first_name, a.last_name, COUNT(ma.role) AS role_count
@@ -156,9 +159,9 @@ ORDER BY movie_count DESC
 LIMIT 1;
 
 -- mendapatkan data movies dengan list actors yang disatukan menjadi satu kolom (dipisahkan dengan koma) dengan menggunakan string_agg
-SELECT m.id, m.title, string_agg(a.first_name || ' ' || a.last_name, ', ') AS actors
-FROM movies m
-JOIN movie_actors ma ON ma.movie_id = m.id
+SELECT m.id, m.title, string_agg(a.first_name || ', ' || a.last_name, '') AS actors
+FROM movie_actors ma
+JOIN movies m ON m.id = ma.movie_id
 JOIN actors a ON a.id = ma.actor_id
 GROUP BY m.id, m.title;
 
