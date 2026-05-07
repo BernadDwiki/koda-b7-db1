@@ -136,12 +136,12 @@ FROM directors d
 JOIN movies m ON m.director_id = d.id
 GROUP BY d.first_name, d.last_name
 
--- menampilkan list aktor dengan peran lebih dari 5
+-- menampilkan list aktor dengan peran lebih dari 5 
 SELECT a.first_name, a.last_name, COUNT(ma.role) AS role_count
 FROM actors a
 JOIN movie_actors ma ON ma.actor_id = a.id
 GROUP BY a.first_name, a.last_name
-HAVING COUNT(ma.role) > 2;
+HAVING COUNT(ma.role) > 5;
 
 -- menampilkan direktor yang paling produktif sepanjang masa
 SELECT d.first_name, d.last_name, COUNT(m.id) AS movie_count
